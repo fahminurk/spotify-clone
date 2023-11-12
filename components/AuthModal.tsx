@@ -8,9 +8,7 @@ import {
   useSupabaseClient,
 } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/navigation";
-
 import useAuthModal from "@/hooks/useAuthModal";
-
 import Modal from "./ui/Modal";
 
 const AuthModal = () => {
@@ -42,7 +40,7 @@ const AuthModal = () => {
     >
       <Auth
         supabaseClient={supabaseClient}
-        providers={["github"]}
+        providers={[]}
         magicLink={true}
         appearance={{
           theme: ThemeSupa,
