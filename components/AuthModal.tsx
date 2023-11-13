@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import {
   useSessionContext,
@@ -50,8 +49,6 @@ const AuthModal = () => {
           email: values.email,
           password: values.password,
         });
-        console.log(error?.message);
-        console.log(data);
         if (error && !data) return toast.error(error.message);
         toast.success("Account created, check your email to verify");
       } else {
@@ -70,8 +67,6 @@ const AuthModal = () => {
       setIsLoading(false);
     }
   };
-
-  console.log(session);
 
   return (
     <Modal

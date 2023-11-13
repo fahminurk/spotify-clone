@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import useLoadImage from "@/hooks/useLoadImage";
 import { Song } from "@/types";
 import Image from "next/image";
@@ -22,11 +23,10 @@ const MediaItem: React.FC<MediaItemProps> = ({ data, onClick }) => {
       className="flex items-center gap-x-3 cursor-pointer hover:bg-neutral-800/50 w-full p-2 rounded-md"
     >
       <div className="relative rounded-md min-h-[48px] min-w-[48px] overflow-hidden">
-        <Image
+        <img
           src={imageUrl || "/images/liked.png"}
-          fill
+          className="absolute w-full h-full object-cover"
           alt="image"
-          className="object-cover"
         />
       </div>
       <div className="flex flex-col gap-y-1 overflow-hidden">
