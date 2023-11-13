@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import getLikeSongs from "@/actions/getLikeSongs";
 import Header from "@/components/Header";
 import LikedContent from "@/app/liked/components/LikedContent";
@@ -12,9 +13,8 @@ const page = async () => {
       <Header>
         <div className="flex flex-col md:flex-row items-center gap-x-5">
           <div className="relative h-32 w-32 lg:h-44 lg:w-44">
-            <Image
+            <img
               src="/images/liked.png"
-              fill
               alt="playlist"
               className="object-cover"
             />
