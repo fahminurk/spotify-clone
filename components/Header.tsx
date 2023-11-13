@@ -11,6 +11,8 @@ import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useUser } from "@/hooks/useUser";
 import { FaUserAlt } from "react-icons/fa";
 import { toast } from "react-hot-toast";
+import { AiOutlinePlus } from "react-icons/ai";
+import useUploadModal from "@/hooks/useUploadModal";
 
 type HeaderProps = {
   children: React.ReactNode;
@@ -19,20 +21,25 @@ type HeaderProps = {
 
 const Header: React.FC<HeaderProps> = ({ children, className }) => {
   const router = useRouter();
-  const { onOpen } = useAuthModal();
+  const authModal = useAuthModal();
+  const uploadModal = useUploadModal();
   const supabaseClient = useSupabaseClient();
   const { user, subscription } = useUser();
   const handleLogout = async () => {
     const { error } = await supabaseClient.auth.signOut();
-    //
     router.refresh();
-
     if (error) {
       toast.error(error.message);
       console.log(error);
     } else {
       toast.success("Logged out");
     }
+  };
+
+  const onClick = () => {
+    if (!user) return authModal.onOpen();
+
+    return uploadModal.onOpen();
   };
   return (
     <div
@@ -57,11 +64,23 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
           </button>
         </div>
         <div className="flex md:hidden gap-x-2 items-center">
-          <button className="rounded-full p-2 bg-white flex items-center justify-center hover:opacity-50 transition">
+          <button
+            onClick={() => router.push("/")}
+            className="rounded-full p-2 bg-white flex items-center justify-center hover:opacity-50 transition"
+          >
             <HiHome className="text-black" size={20} />
           </button>
-          <button className="rounded-full p-2 bg-white flex items-center justify-center hover:opacity-50 transition">
+          <button
+            onClick={() => router.push("/search")}
+            className="rounded-full p-2 bg-white flex items-center justify-center hover:opacity-50 transition"
+          >
             <BiSearch className="text-black" size={20} />
+          </button>
+          <button
+            onClick={onClick}
+            className="rounded-full hover:bg-slate-300/50 flex items-center justify-center hover:opacity-75 transition"
+          >
+            <AiOutlinePlus className="text-white" size={35} />
           </button>
         </div>
         <div className="flex justify-between items-center gap-x-4">
@@ -77,15 +96,13 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
           ) : (
             <>
               <div>
-                <Button onClick={onOpen} className="bg-white px-6 py-2">
+                <Button
+                  onClick={authModal.onOpen}
+                  className="bg-white px-6 py-2"
+                >
                   Login
                 </Button>
               </div>
-              {/* <div>
-                <Button onClick={onOpen} className="bg-white px-6 py-2">
-                  Login
-                </Button>
-              </div> */}
             </>
           )}
         </div>
