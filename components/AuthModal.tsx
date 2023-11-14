@@ -107,7 +107,7 @@ const AuthModal = () => {
           </div>
         ) : (
           <div
-            className="flex gap-2 justify-center"
+            className="flex gap-2 justify-center text-sm"
             onClick={() => setType("login")}
           >
             <p>alredy have an account?</p>
