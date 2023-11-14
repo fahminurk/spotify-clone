@@ -6,10 +6,10 @@ interface UploadModalStore {
   onClose: () => void;
 }
 
-const useAuthModal = create<UploadModalStore>((set) => ({
+const useUploadModal = create<UploadModalStore>((set) => ({
   isOpen: false,
   onOpen: () => set({ isOpen: true }),
   onClose: () => set({ isOpen: false }),
 }));
 
-export default useAuthModal;
+export default useUploadModal;
